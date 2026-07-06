@@ -1,0 +1,182 @@
+{
+    "Athletic Club": {
+        "id": 1,
+        "crest": {
+            "principal": "#E8151F",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Club Atl\u00e9tico de Madrid": {
+        "id": 2,
+        "crest": {
+            "principal": "#E8151F",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "CA Osasuna": {
+        "id": 3,
+        "crest": {
+            "principal": "#D71028",
+            "secondary": "#D71028",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "RCD Espanyol de Barcelona": {
+        "id": 4,
+        "crest": {
+            "principal": "#025FB8",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "FC Barcelona": {
+        "id": 5,
+        "crest": {
+            "principal": "#024995",
+            "secondary": "#A5224C",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Getafe CF": {
+        "id": 6,
+        "crest": {
+            "principal": "#1260A1",
+            "secondary": "#1260A1",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "Real Madrid CF": {
+        "id": 7,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#FFFFFF",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "Rayo Vallecano de Madrid": {
+        "id": 8,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#E1361E",
+            "pattern": "vertical",
+            "stripeSizes": [20, 10, 20]
+        }
+    },
+    "Levante UD": {
+        "id": 9,
+        "crest": {
+            "principal": "#17599E",
+            "secondary": "#A51439",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Real Betis Balompi\u00e9": {
+        "id": 10,
+        "crest": {
+            "principal": "#028736",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Real Sociedad de F\u00fatbol": {
+        "id": 11,
+        "crest": {
+            "principal": "#0051A5",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Villarreal CF": {
+        "id": 12,
+        "crest": {
+            "principal": "#FEDE50",
+            "secondary": "#FEDE50",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "Valencia CF": {
+        "id": 13,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#000000",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "Deportivo Alav\u00e9s": {
+        "id": 14,
+        "crest": {
+            "principal": "#164FA8",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Elche CF": {
+        "id": 15,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#317753",
+            "pattern": "vertical",
+            "stripeSizes": [20, 10, 20]
+        }
+    },
+    "RC Celta de Vigo": {
+        "id": 16,
+        "crest": {
+            "principal": "#6EACE5",
+            "secondary": "#6EACE5",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "Sevilla FC": {
+        "id": 17,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#E8151F",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "M\u00e1laga CF": {
+        "id": 18,
+        "crest": {
+            "principal": "#96C3E0",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "RC Deportivo La Coru\u00f1a": {
+        "id": 19,
+        "crest": {
+            "principal": "#0073B6",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Real Racing Club de Santander": {
+        "id": 20,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#01A82E",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    }
+}
