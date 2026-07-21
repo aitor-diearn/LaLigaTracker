@@ -4,7 +4,7 @@ import Crest from "./Crest"
 import ShowTeamNames from './ShowTeamNames'
 import standings from '../data/standings.json'
 import teams from '../data/teams.json'
-import '../styles/clasificacion.css'
+import '../styles/standings.css'
 import { useState } from 'react'
 
 /**
