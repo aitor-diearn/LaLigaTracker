@@ -1,0 +1,67 @@
+import Window from "./Window"
+import Footer from "./Footer"
+import ShowMatch from "./ShowMatch"
+import matches from '../data/matches.json'
+import teams from '../data/teams.json'
+import { useState } from "react"
+
+/**
+ * Función que gestiona el click de los botones que permiten el cambio entre jornadas.
+ * @param {number} matchDay Número de la jornada que se está mostrando
+ * @param {function} setMatchDay Función que cambia el estado de la jornada que se muestra.
+ * @param {function} setMatchesToShow Función que cambia los partidos que se muestran al usuario.
+ * @param {boolean} addDay Booleano que permite determinar si se buscará en la jornada anterior o posterior.
+ */
+function handleClick(matchDay, setMatchDay, setMatchesToShow, addDay){
+    const newMatchDay = addDay ? matchDay + 1 : matchDay - 1
+    if("matchDay" + newMatchDay in matches){
+        setMatchDay(newMatchDay)
+        setMatchesToShow(matches['matchDay' + newMatchDay])
+    }     
+}
+
+/**
+ * Componente que permite mostrar la pantalla con los partidos disputados cada jornada.
+ * @example <Matches/>
+ */
+export default function Matches() {
+
+    // Definimos los estados necesarios para mostrar los partidos
+    const [matchesToShow, setMatchesToShow] = useState(matches['matchDay1'])
+    const [matchDay, setMatchDay] = useState(1)
+
+    // Retornamos el componente
+    return (
+        <main className="bg-secondary flex-1">
+            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Partidos</h1>
+            <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
+                <nav className="flex justify-center gap-x-4 lg:text-2xl mb-5">
+                    <button onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, false)}>&lt;&lt;</button>
+                    <p className="font-bold text-principal">Jornada {matchDay}</p>
+                    <button onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, true)}>&gt;&gt;</button>
+                </nav>
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-2">
+                    {matchesToShow.map((match, index) => {
+
+                        // Revisamos el resultado del partido
+                        const scoreHome = match.score.home != null ? match.score.home : ''
+                        const scoreAway = match.score.away != null ? match.score.away : ''
+
+                        const matchData = {
+                            'dateTime': match.datetime,
+                            'homeTeam': teams[match.homeTeamId].name,
+                            'homeTeamTla': teams[match.homeTeamId].tla,
+                            'awayTeam': teams[match.awayTeamId].name,
+                            'awayTeamTla': teams[match.awayTeamId].tla,
+                            'homeTeamDesign': teams[match.homeTeamId].crest,
+                            'awayTeamDesign': teams[match.awayTeamId].crest,
+                            'score': scoreHome + '-' + scoreAway
+                        }
+
+                        return <ShowMatch key={index} matchInfo={matchData}/>
+                    })}
+                </section>
+            </Window>
+        </main>
+    )
+}

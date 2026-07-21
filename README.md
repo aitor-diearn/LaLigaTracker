@@ -1,12 +1,13 @@
 # LaLigaTracker
 
-Aplicación no oficial de la liga española que genera la clasificación y partidos disputados en la actual temporada. 
+Aplicación no oficial de la liga española que muestra la clasificación y partidos disputados en la actual temporada. 
 
-Los datos del campeonato son obtenidos a partir de la API <a href="https://www.football-data.org/">football-data.org</a>, y transformados mediante código, guardándose estos en tantos ficheros JSON como sean necesarios. Dichos ficheros JSON se almacenan en la carpeta <i>backend/output</i>.
+La parte back-end de obtención de datos se ha hecho con Python. Dichos datos son obtenidos de la API de <a href="https://www.football-data.org/">football-data.org</a> y transformados en lo que espera recibir la parte front-end, guardándose estos en tantos ficheros JSON como sean necesarios.
+Dichos ficheros se almacenan en la carpeta <i>frontend/src/data</i>.
 
-El proyecto se ha hecho mediante scripts de Python, ejecutados usando un entorno virtual, creado con venv.
+La parte front-end es una aplicación hecha en React, versión 19.2.5, y creada con Vite. Además, se ha utilizado la librería TailwindCSS para estilizar la aplicación.
 
-<h3>Aviso legal</h3>
+### Aviso legal
 
 Este proyecto ha sido desarrollado con fines exclusivamente educativos y como parte de un portfolio personal. No tiene ánimo de lucro.
 

@@ -50,7 +50,7 @@ try:
         'metadata': metadata
     }
     for nameFile, data in dataToSave.items():
-        saveDataInFile(data, './output/' + nameFile + '.json')
+        saveDataInFile(data, '../frontend/src/data/' + nameFile + '.json')
 except FileNotFoundError as e:
     logging.exception(str(e))
     exit()

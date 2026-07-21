@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme{
+  --color-victory: #22C55E;
+  --color-draw: #EAB308;
+  --color-defeat: #FF4B44;
+}
