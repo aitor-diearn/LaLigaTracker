@@ -1,6 +1,7 @@
 import Window from "./Window"
 import Button from "./Button"
 import ShowMatch from "./ShowMatch"
+import Crest from "./Crest"
 import standings from '../data/standings.json'
 import matches from '../data/matches.json'
 import teams from '../data/teams.json'
@@ -17,8 +18,8 @@ function getMatchesToShow(matchesToShow, matches, teams, status) {
     // Dependiendo del status, el bucle se hará del 1º partido al último o inverso
     for (let i = status == 'scheduled' ? 1 : 38; status == 'scheduled' ? i <= 38 : i >= 1; status == 'scheduled' ? i++ : i--) {
 
-        // Revisamos que no haya ya 10 partidos introducidos
-        if (matchesToShow.length >= 10) {
+        // Revisamos que no haya ya 30 partidos introducidos para tener suficientes para mostrar
+        if (matchesToShow.length >= 30) {
             break;
         }
 
@@ -46,6 +47,10 @@ function getMatchesToShow(matchesToShow, matches, teams, status) {
         for (let m of matchesToAdd) {
             matchesToShow.push(m)
         }
+
+        // Ordenamos los partidos para que aparezcan siempre los más antiguos primero, y evitar problemas con los aplazados
+        matchesToShow.sort((a, b) => status == 'scheduled' ? new Date(a.dateTime) > new Date(b.dateTime) : new Date(a.dateTime) < new Date(b.dateTime) 
+        )
     }
 }
 
@@ -55,6 +60,10 @@ function getMatchesToShow(matchesToShow, matches, teams, status) {
  */
 export default function Home() {
 
+    // Límites de los equipos que se mostrarán en la clasificación, y del número de partidos mostrados
+    const limitTeamsStanding = 10
+    const limitMatchesShown = 10
+
     // Generamos el array de los partidos a mostrar
     const matchesToShow = []
     for(let t of ['scheduled', 'finished']){
@@ -63,7 +72,7 @@ export default function Home() {
 
     // Generamos el código del componente que se mostrará al usuario
     return (
-        <main className="bg-secondary flex-1">
+        <>
             <Window>
                 <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">LaLigaTracker</p>
                 <p>Aplicación no oficial de datos de la liga española.</p>
@@ -71,22 +80,50 @@ export default function Home() {
             <section className="md:ml-6 md:mr-6 grid grid-cols-1 md:grid-cols-2 gap-x-6">
                 <Window extraStyles="md:rounded-3xl">
                     <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">Ranking</p>
-                    {standings['general'].map((team, index) => {
-                        
-                        // Solo mostramos 10 equipos
-                        if (index <= 9) {
-                            const teamName = teams[team.teamId].name
-                            return <p key={index}>{index + 1}. {teamName} - {team.points} pts.</p>
-                        }
-                    })}
+                    <table className="w-full table-auto border-separate border-spacing-y-1.5">
+                        <thead>
+                            <tr>
+                                {['#', 'Equipo', 'PJ', 'DG', 'Pts.'].map((text, index) => <td key={index}>{text}</td>)}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {standings['general'].map((s, index) => {
+                                if(index < limitTeamsStanding){
+                                    return (
+                                         <tr key={index}>
+                                            <td>{index + 1}.</td>
+                                            <td className="text-left">
+                                                <div className="flex items-center">
+                                                    <Crest design={teams[s.teamId].crest} extraStyles="shrink-0 w-7 h-7 md:w-9 md:h-9 lg:w-11 lg:h-11" />
+                                                    <span className="inline-block lg:hidden pl-3">{teams[s.teamId].tla}</span>
+                                                    <span className="hidden lg:inline-block pl-3">{teams[s.teamId].name}</span>
+                                                </div>
+                                            </td>
+                                            <td>{s.matches.win + s.matches.draw + s.matches.lose}</td>
+                                            <td>{s.goals.for - s.goals.against}</td>
+                                            <td>{s.points}</td>
+                                        </tr>
+                                    )
+                                }
+                            })}
+                        </tbody>
+                    </table>
                     <Button text="Ver más" route="/standings"/>
                 </Window>
                 <Window extraStyles="md:rounded-3xl">
                     <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">Próximos partidos</p>
-                    {matchesToShow.map((match, index) => <ShowMatch key={index} matchInfo={match} fullScreen={false}/>)}
+                    <article className="flex flex-col gap-y-1 md:gap-y-2">
+                        {matchesToShow.map((match, index) => {
+
+                            // Mostramos solo un número determinado de partidos
+                            if(index < limitMatchesShown){
+                                return <ShowMatch key={index} matchInfo={match} fullScreen={false}/>
+                            }
+                        })}
+                    </article>
                     <Button text="Ver más" route="/matches" />
                 </Window>
             </section>
-        </main>
+        </>
     )
 }

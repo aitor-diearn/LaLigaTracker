@@ -15,11 +15,13 @@ export default function App() {
             <BrowserRouter>
                 <Navbar />
 
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/standings" element={<Standings />} />
-                    <Route path="/matches" element={<Matches />} />
-                </Routes>
+                <main className="bg-secondary flex-1">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/standings" element={<Standings />} />
+                        <Route path="/matches" element={<Matches />} />
+                    </Routes>
+                </main>
 
                 <Footer/>
             </BrowserRouter>

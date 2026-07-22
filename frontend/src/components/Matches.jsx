@@ -32,7 +32,7 @@ export default function Matches() {
 
     // Retornamos el componente
     return (
-        <main className="bg-secondary flex-1">
+        <>
             <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Partidos</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
                 <nav className="flex justify-center gap-x-4 lg:text-2xl mb-5">
@@ -40,7 +40,7 @@ export default function Matches() {
                     <p className="font-bold text-principal">Jornada {matchDay}</p>
                     <button onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, true)}>&gt;&gt;</button>
                 </nav>
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-2">
+                <section className="grid grid-cols-1 md:grid-rows-5 md:grid-cols-[50%_50%] md:grid-flow-col gap-x-2 gap-y-2">
                     {matchesToShow.map((match, index) => {
 
                         // Revisamos el resultado del partido
@@ -62,6 +62,6 @@ export default function Matches() {
                     })}
                 </section>
             </Window>
-        </main>
+        </>
     )
 }

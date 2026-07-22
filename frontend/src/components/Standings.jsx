@@ -125,7 +125,7 @@ export default function Standings() {
 
     // Retornamos el componente
     return (
-        <main className="bg-secondary flex-1">
+        <>
             <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Clasificación</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
                 <nav className="flex flex-col gap-y-2 sm:flex-row justify-between mb-2">
@@ -137,7 +137,7 @@ export default function Standings() {
                 <table className="w-full table-auto border-separate border-spacing-y-1.5 text-sm md:text-base lg:text-lg xl:text-xl">
                     <thead>
                         <tr>
-                            {['#', 'Equipo', 'PJ', 'PG', 'PE', 'PP', 'GF', 'GC', 'DF', 'Pts.', 'Forma', 'Próximo rival'].map((text, index) => <td key={index} className={arrayStyleColsTable[index]}>{text}</td>)}
+                            {['#', 'Equipo', 'PJ', 'PG', 'PE', 'PP', 'GF', 'GC', 'DG', 'Pts.', 'Forma', 'Próximo rival'].map((text, index) => <td key={index} className={arrayStyleColsTable[index]}>{text}</td>)}
                         </tr>
                     </thead>
                     <tbody>
@@ -169,6 +169,6 @@ export default function Standings() {
                     </tbody>
                 </table>
             </Window>
-        </main>
+        </>
     )
 }
