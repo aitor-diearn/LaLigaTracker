@@ -29,6 +29,30 @@ def formatOriginalData(matches: json) -> tuple:
     with open("data/teamsExtraInfo.json", "r", encoding="utf-8") as f:
         teamsInfo = json.load(f)
 
+    # Recorremos la información adicional de los equipos para generar las clasificaciones de estos y la información que tendrán
+    for team in teamsInfo:
+        for keyStanding in ['general', 'local', 'visitor']:
+            standings[keyStanding][teamsInfo[team]['id']] = {
+                    'teamId': teamsInfo[team]['id'],
+                    'matches': {
+                        'win': 0,
+                        'draw': 0,
+                        'lose': 0,
+                    },
+                    'points': 0,
+                    'goals': {
+                        'for': 0,
+                        'against': 0
+                    },
+                    'form': '',
+                    'nextRival': None
+                }
+
+        teams[teamsInfo[team]['id']] = {
+            'name': team,
+            'crest': teamsInfo[team]['crest']
+        }
+
     # Creamos una clave para almacenar los partidos de cada jornada
     for i in range(1, 39):
         matchesDep.update({'matchDay' + str(i): []})
@@ -55,42 +79,15 @@ def formatOriginalData(matches: json) -> tuple:
         # Lista con los ids de los equipos que disputan el partido
         listIdTeams = [matchDep['homeTeamId'], matchDep['awayTeamId']]
 
-        # Si es la 1ª jornada, guardamos los datos del equipo en el diccionario de estos, y creamos sus datos en las diferentes clasificaciones 
-        # Nota: Las clasificaciones se declarán aqui como objetos de objetos con el objetivo de facilitar los cálculos de partidos, pero, una vez se terminan estos, se cambian a listas, que es lo que espera el front-end.
+        # Si es la 1ª jornada, guardamos la abreviatura de cada equipo en el diccionario de equipos
         if matchday == 1:
             for index, teamMatch in enumerate(listIdTeams):
-                for keyStanding in ['general', 'local', 'visitor']:
-                    standings[keyStanding][teamMatch] = {
-                            'teamId': teamMatch,
-                            'matches': {
-                                'win': 0,
-                                'draw': 0,
-                                'lose': 0,
-                            },
-                            'points': 0,
-                            'goals': {
-                                'for': 0,
-                                'against': 0
-                            },
-                            'form': '',
-                            'nextRival': None
-                        }
-
                 if index == 0:
                     keyTeam = 'homeTeam'
                 else:
                     keyTeam = 'awayTeam'
 
-                if match[keyTeam]['name'] in teamsInfo:
-                    crest = teamsInfo[match[keyTeam]['name']]['crest']
-                else:
-                    crest = {}
-
-                teams[teamMatch] = {
-                    'name': match[keyTeam]['name'],
-                    'tla': match[keyTeam]['tla'],
-                    'crest': crest
-                }
+                teams[teamMatch]['tla'] = match[keyTeam]['tla']
 
         # Revisamos si el partido se ha jugado o no
         if matchDep['status'].strip() != 'finished':
