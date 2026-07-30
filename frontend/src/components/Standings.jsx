@@ -141,9 +141,24 @@ export default function Standings() {
                         </tr>
                     </thead>
                     <tbody>
-                        {standing.map((s, index) => (
+                        {standing.map((s, index) => {
+                            
+                            // Determinamos el valor del borde que se mostrará al usuario
+                            let borderColor = "border-transparent"
+                            if(index < 4){
+                                borderColor = "border-champions-league"
+                            }else if(index < 5){
+                                borderColor = "border-europa-league"
+                            }else if(index < 6){
+                                borderColor = "border-conference-league"
+                            }else if(index >= standing.length - 3){
+                                borderColor = "border-relegation"
+                            }
+                        
+                            // Retornamos la fila de la tabla
+                            return (
                             <tr key={index}>
-                                <td>{index + 1}.</td>
+                                <td className={"border-l-4 md:border-l-6 " + borderColor}>{index + 1}.</td>
                                 <td className="text-left">
                                     <div className="flex items-center">
                                         <Crest design={s.design} extraStyles="shrink-0 w-7 h-7 md:w-9 md:h-9 lg:w-11 lg:h-11" />
@@ -165,7 +180,7 @@ export default function Standings() {
                                     <span className="hidden lg:inline-block whitespace-nowrap">{s.nextRivalName}</span>
                                 </td>
                             </tr>
-                        ))}
+                        )})}
                     </tbody>
                 </table>
             </Window>

@@ -3,6 +3,7 @@ import Footer from "./Footer"
 import ShowMatch from "./ShowMatch"
 import matches from '../data/matches.json'
 import teams from '../data/teams.json'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from "react"
 
 /**
@@ -35,10 +36,10 @@ export default function Matches() {
         <>
             <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Partidos</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
-                <nav className="flex justify-center gap-x-4 lg:text-2xl mb-5">
-                    <button onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, false)}>&lt;&lt;</button>
-                    <p className="font-bold text-principal">Jornada {matchDay}</p>
-                    <button onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, true)}>&gt;&gt;</button>
+                <nav className="flex justify-center gap-x-4 lg:text-2xl mb-3 md:mb-5">
+                        <button className={matchDay == 1 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, false)}><i className="bi bi-chevron-double-left"></i></button>
+                        <p className="font-bold text-principal">Jornada {matchDay}</p>
+                        <button className={matchDay == 38 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, true)}><i className="bi bi-chevron-double-right"></i></button>
                 </nav>
                 <section className="grid grid-cols-1 md:grid-rows-5 md:grid-cols-[50%_50%] md:grid-flow-col gap-x-2 gap-y-2">
                     {matchesToShow.map((match, index) => {

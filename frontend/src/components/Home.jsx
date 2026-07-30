@@ -89,14 +89,28 @@ export default function Home() {
                         <tbody>
                             {standings['general'].map((s, index) => {
                                 if(index < limitTeamsStanding){
+
+                                    // Determinamos el valor del borde que se mostrará al usuario
+                                    let borderColor = "border-transparent"
+                                    if(index < 4){
+                                        borderColor = "border-champions-league"
+                                    }else if(index < 5){
+                                        borderColor = "border-europa-league"
+                                    }else if(index < 6){
+                                        borderColor = "border-conference-league"
+                                    }else if(index >= standings['general'].length - 3){
+                                        borderColor = "border-relegation"
+                                    }
+
+                                    // Retornamos la fila
                                     return (
                                          <tr key={index}>
-                                            <td>{index + 1}.</td>
+                                            <td className={"border-l-4 " + borderColor}>{index + 1}.</td>
                                             <td className="text-left">
                                                 <div className="flex items-center">
                                                     <Crest design={teams[s.teamId].crest} extraStyles="shrink-0 w-7 h-7 md:w-9 md:h-9 lg:w-11 lg:h-11" />
-                                                    <span className="inline-block lg:hidden pl-3">{teams[s.teamId].tla}</span>
-                                                    <span className="hidden lg:inline-block pl-3">{teams[s.teamId].name}</span>
+                                                    <span className="inline-block sm:hidden md:inline-block lg:hidden pl-3">{teams[s.teamId].tla}</span>
+                                                    <span className="hidden sm:inline-block md:hidden lg:inline-block pl-3">{teams[s.teamId].name}</span>
                                                 </div>
                                             </td>
                                             <td>{s.matches.win + s.matches.draw + s.matches.lose}</td>

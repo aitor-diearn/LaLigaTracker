@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
-@theme{
-  --color-principal: #FF4B44;
-  --color-secondary: #F1F5F9
+@theme {
+    --color-principal: #FF4B44;
+    --color-secondary: #F1F5F9;
+    --color-champions-league: #2563EB;
+    --color-europa-league: #D97706;
+    --color-conference-league: #16A34A;
+    --color-relegation: #DC2626;
 }
