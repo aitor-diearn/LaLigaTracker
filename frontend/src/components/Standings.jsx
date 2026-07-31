@@ -6,6 +6,7 @@ import standings from '../data/standings.json'
 import teams from '../data/teams.json'
 import '../styles/standings.css'
 import { useState } from 'react'
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 /**
  * Función que permite obtener la infomación de la clasificación para luego mostrarse en la tabla correctamente
@@ -95,6 +96,9 @@ function TeamForm({ teamForm }) {
  * @example <Standings />
  */
 export default function Standings() {
+
+    // Ponemos el title de la pestaña
+    useDocumentTitle('Clasificación')
 
     // Creamos estados para almacenar la clasificación y mostrar, de manera gráfica, cual se está viendo
     const [standing, setStanding] = useState(getDataStanding('general'))

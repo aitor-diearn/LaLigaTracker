@@ -5,6 +5,7 @@ import Crest from "./Crest"
 import standings from '../data/standings.json'
 import matches from '../data/matches.json'
 import teams from '../data/teams.json'
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 /**
  * Función que permite obtener los partidos que se mostrarán en su respectiva sección.
@@ -59,6 +60,9 @@ function getMatchesToShow(matchesToShow, matches, teams, status) {
  * @example <Home/>
  */
 export default function Home() {
+
+    // Ponemos el title de la pestaña
+    useDocumentTitle('Principal')
 
     // Límites de los equipos que se mostrarán en la clasificación, y del número de partidos mostrados
     const limitTeamsStanding = 10

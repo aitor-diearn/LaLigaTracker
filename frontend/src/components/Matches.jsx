@@ -5,6 +5,7 @@ import matches from '../data/matches.json'
 import teams from '../data/teams.json'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from "react"
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 /**
  * Función que gestiona el click de los botones que permiten el cambio entre jornadas.
@@ -26,6 +27,9 @@ function handleClick(matchDay, setMatchDay, setMatchesToShow, addDay){
  * @example <Matches/>
  */
 export default function Matches() {
+
+    // Ponemos el title de la pestaña
+    useDocumentTitle('Partidos')
 
     // Definimos los estados necesarios para mostrar los partidos
     const [matchesToShow, setMatchesToShow] = useState(matches['matchDay1'])
