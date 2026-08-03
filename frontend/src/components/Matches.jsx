@@ -14,11 +14,10 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
  * @param {function} setMatchesToShow Función que cambia los partidos que se muestran al usuario.
  * @param {boolean} addDay Booleano que permite determinar si se buscará en la jornada anterior o posterior.
  */
-function handleClick(matchDay, setMatchDay, setMatchesToShow, addDay){
+function handleClick(matchDay, setMatchDay, addDay){
     const newMatchDay = addDay ? matchDay + 1 : matchDay - 1
     if("matchDay" + newMatchDay in matches){
         setMatchDay(newMatchDay)
-        setMatchesToShow(matches['matchDay' + newMatchDay])
     }     
 }
 
@@ -32,7 +31,6 @@ export default function Matches() {
     useDocumentTitle('Partidos')
 
     // Definimos los estados necesarios para mostrar los partidos
-    const [matchesToShow, setMatchesToShow] = useState(matches['matchDay1'])
     const [matchDay, setMatchDay] = useState(1)
 
     // Retornamos el componente
@@ -41,12 +39,12 @@ export default function Matches() {
             <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Partidos</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
                 <nav className="flex justify-center gap-x-4 lg:text-2xl mb-3 md:mb-5">
-                        <button className={matchDay == 1 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, false)}><i className="bi bi-chevron-double-left"></i></button>
+                        <button className={matchDay == 1 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, false)}><i className="bi bi-chevron-double-left"></i></button>
                         <p className="font-bold text-principal">Jornada {matchDay}</p>
-                        <button className={matchDay == 38 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, setMatchesToShow, true)}><i className="bi bi-chevron-double-right"></i></button>
+                        <button className={matchDay == 38 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, true)}><i className="bi bi-chevron-double-right"></i></button>
                 </nav>
                 <section className="grid grid-cols-1 md:grid-rows-5 md:grid-cols-[50%_50%] md:grid-flow-col gap-x-2 gap-y-2">
-                    {matchesToShow.map((match, index) => {
+                    {matches['matchDay' + matchDay].map((match, index) => {
 
                         // Revisamos el resultado del partido
                         const scoreHome = match.score.home != null ? match.score.home : ''
