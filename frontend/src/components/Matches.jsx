@@ -3,6 +3,7 @@ import Footer from "./Footer"
 import ShowMatch from "./ShowMatch"
 import matches from '../data/matches.json'
 import teams from '../data/teams.json'
+import metadata from '../data/metadata.json'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from "react"
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
@@ -31,7 +32,7 @@ export default function Matches() {
     useDocumentTitle('Partidos')
 
     // Definimos los estados necesarios para mostrar los partidos
-    const [matchDay, setMatchDay] = useState(1)
+    const [matchDay, setMatchDay] = useState(metadata.actualMatchDay)
 
     // Retornamos el componente
     return (

@@ -316,10 +316,19 @@ def getMetadata(matches: json) -> dict:
             dict: Diccionaro con los metadatos de la aplicación.
     """
 
+    # Obtenemos la jornada donde se haya el próximo partido a jugar
+    actualMatchDay = 1
+    for match in matches['matches']:
+        if match['status'].lower() != 'finished':
+            actualMatchDay = match['matchday']
+            break
+
+    # Retornamos los metadatos
     return {
         'season': matches['filters']['season'],
         'competition': matches['competition']['name'],
-        'lastUpdate': datetime.now(UTC).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+        'lastUpdate': datetime.now(UTC).replace(microsecond=0).isoformat().replace('+00:00', 'Z'),
+        'actualMatchDay': actualMatchDay
     }
 
 def saveDataInFile(data: json, filename: str):
