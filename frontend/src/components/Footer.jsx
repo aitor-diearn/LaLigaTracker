@@ -1,5 +1,6 @@
 import Window from "./Window"
 import metadata from '../data/metadata.json'
+import { formatDate } from "../utils/formatDate"
 
 /**
  * Componente que muestra el footer de la página.
@@ -14,12 +15,7 @@ export default function Footer() {
                 <p>Los datos deportivos mostrados en la aplicación se obtienen a través de la API de <a href="https://www.football-data.org/">football-data.org</a> y se utilizan de acuerdo con sus condiciones de uso.</p>
                 <p>Los nombres de los clubes, competiciones, escudos, logotipos y demás marcas mencionadas o mostradas en la aplicación pertenecen a sus respectivos propietarios y se utilizan únicamente con fines identificativos.</p>
                 <p>Este proyecto no está afiliado, patrocinado ni respaldado por <a href="https://www.football-data.org/">football-data.org</a>, LaLiga, los clubes participantes ni ninguna otra entidad deportiva.</p>
-                <p>Información de la liga actualizada a {new Intl.DateTimeFormat(undefined, {
-                    day: "2-digit",
-                    month: "short",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    }).format(new Date(metadata.lastUpdate))}
+                <p>Información de la liga actualizada a {formatDate(metadata.lastUpdate)}
                 </p>
             </Window>
         </footer>
