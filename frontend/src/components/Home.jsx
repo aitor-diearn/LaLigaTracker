@@ -64,7 +64,7 @@ function getMatchesToShow(matchesToShow, matches, teams, status) {
 function Button({ text, route = '/' }) {
     return (
         <Link to={route}>
-            <button className="bg-principal rounded-4xl pt-1 md:pt-2 pb-1 md:pb-2 text-white min-w-35 lg:min-w-45 m-2 md:m-3">{text}</button>
+            <button className="bg-principal rounded-4xl pt-1 md:pt-2 pb-1 md:pb-2 text-white min-w-35 lg:min-w-45 m-2 md:m-3 cursor-pointer">{text}</button>
         </Link>
     )
 }
