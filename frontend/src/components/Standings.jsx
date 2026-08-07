@@ -1,7 +1,6 @@
 import Window from "./Window"
 import Footer from "./Footer"
 import Crest from "./Crest"
-import ShowTeamNames from './ShowTeamNames'
 import standings from '../data/standings.json'
 import teams from '../data/teams.json'
 import '../styles/standings.css'
