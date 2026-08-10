@@ -141,6 +141,7 @@ export default function Home() {
                         </tbody>
                     </table>
                     <Button text="Ver más" route="/standings"/>
+                    <Button text="Haz tu predicción" route="/calculator"/>
                 </Window>
                 <Window extraStyles="md:rounded-3xl">
                     <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">Próximos partidos</p>

@@ -4,7 +4,7 @@
 
 _Nota: La aplicación todavia se encuentra en desarrollo. Se irá actualizando y mejorando con el tiempo._
 
-Aplicación no oficial de la liga española que muestra la clasificación y partidos de la actual temporada. 
+Aplicación no oficial de la liga española que muestra la clasificación y partidos de la actual temporada. También se puede realizar una simulación de todos los partidos de la temporada, viendo como cambia la clasificación en vivo.
 
 La parte back-end de obtención de datos se ha hecho con Python. Dichos datos son obtenidos de la API de <a href="https://www.football-data.org/">football-data.org</a> y transformados en lo que espera recibir la parte front-end, guardándose estos en tantos ficheros JSON como sean necesarios.
 Dichos ficheros se almacenan en la carpeta <i>frontend/src/data</i>.
@@ -27,11 +27,11 @@ ___
 
 _Note: The app is still under development. It will be updated and improved over time._
 
-An unofficial app for the Spanish football league that displays the league table and fixtures for the current season.
+An unofficial app for the Spanish football league that displays the league table and fixtures for the current season. You can also make a simulation of all the fixtures in the season and watch how the league table changes in real time.
 
 The back-end is developed with Python. This part retrieves data from the <a href="https://www.football-data.org/">football-data.org</a> API and converts it into the format required by the front-end, saving the data in as many JSON files as necessary. These files are stored in the <i>frontend/src/data</i> folder.
 
-The front-end is developed with React, version 19.2.6, and built with Vite. In addition, the Tailwind CSS library is used to style the application.
+The front-end is developed with React, version 19.2.6, and created with Vite. In addition, the Tailwind CSS library is used to style the application.
 
 ### Legal notice
 

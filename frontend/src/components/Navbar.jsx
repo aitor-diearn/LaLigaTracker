@@ -9,7 +9,8 @@ export default function Navbar(){
     const routes = {
         '/': 'LaLigaTracker',
         '/standings': 'Clasificación',
-        '/matches': 'Partidos'
+        '/matches': 'Partidos',
+        '/calculator': 'Calculadora'
     }
     
     return (

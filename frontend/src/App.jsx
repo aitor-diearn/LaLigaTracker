@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import Home from "./components/Home"
 import Standings from './components/Standings'
 import Matches from './components/Matches'
+import Calculator from './components/Calculator'
 
 /**
  * Componente principal de la aplicación.
@@ -20,6 +21,7 @@ export default function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/standings" element={<Standings />} />
                         <Route path="/matches" element={<Matches />} />
+                        <Route path="/calculator" element={<Calculator />} />
                     </Routes>
                 </main>
 
