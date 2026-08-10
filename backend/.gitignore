@@ -56,3 +56,4 @@ tempCodeRunnerFile.py
 
 # JSON files
 *.json
+!teamsExtraInfo.json
