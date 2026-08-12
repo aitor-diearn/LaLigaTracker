@@ -8,8 +8,9 @@ import teams from '../data/teams.json'
 import metadata from '../data/metadata.json'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState, useMemo } from 'react'
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useDocumentTitle } from "../hooks/useDocumentTitle"
 import { formatDate } from "../utils/formatDate"
+import { useTranslation } from "react-i18next"
 
 /**
  * Función que gestiona el click de los botones que permiten el cambio entre jornadas.
@@ -308,8 +309,11 @@ function generateInputsMatches(value, matchDay, match, field, setAllMatches){
  */
 export default function Calculator() {
 
+    // Creamos el objeto para cambiar de idioma
+    const { t } = useTranslation()
+
     // Ponemos el title de la pestaña
-    useDocumentTitle('Calculadora')
+    useDocumentTitle(t('calculator.title'))
 
     // Creamos estados para los partidos que se muestran, la jornada en juego y la clasificación simulada
     const [allMatches, setAllMatches] = useState(matches)
@@ -322,12 +326,12 @@ export default function Calculator() {
     // Retornamos el componente
     return (
         <>
-            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Calculadora</h1>
+            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">{t('calculator.title')}</h1>
             <section className="md:ml-6 md:mr-6 grid grid-cols-1 md:grid-cols-2 gap-x-6">
                 <Window extraStyles="md:rounded-3xl">
                     <nav className="flex justify-center gap-x-4 lg:text-2xl mb-3 md:mb-5">
                         {generateButtonsMatches("bi bi-chevron-double-left", matchDay == 1 ? "hidden" : "", () => handleClick(matchDay, setMatchDay, false))}
-                        <p className="font-bold text-principal">Jornada {matchDay}</p>
+                        <p className="font-bold text-principal">{t('matches.matchDay')} {matchDay}</p>
                         {generateButtonsMatches("bi bi-chevron-double-right", matchDay == 38 ? "hidden" : "", () => handleClick(matchDay, setMatchDay, true))}
                     </nav>
                     <div>
@@ -362,7 +366,7 @@ export default function Calculator() {
                     <table className="w-full table-auto border-separate border-spacing-y-1.5 text-sm md:text-base">
                         <thead>
                             <tr>
-                                {['#', 'Equipo', 'PJ', 'PG', 'PE', 'PP', 'GF', 'GC', 'DF', 'Pts.'].map((text, index) => <td key={index}>{text}</td>)}
+                                {['#', 'tableTeam', 'tableMatchesPlayed', 'tableMatchesWon', 'tableMatchesDrawn', 'tableMatchesLost', 'tableGoalsFor', 'tableGoalsAgainst', 'tableGoalDifference', 'tablePoints'].map((text, index) => <td key={index}>{text == '#' ? '#' : t('standing.' + text)}</td>)}
                             </tr>
                         </thead>
                         <tbody>

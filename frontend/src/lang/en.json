@@ -1,0 +1,49 @@
+{
+    "home": {
+        "title": "Principal",
+        "welcome": "Unofficial app for the Spanish football league.",
+        "matches": "Upcoming matches",
+        "buttonStanding": "See more",
+        "buttonMatches": "See more",
+        "buttonCalculator": "Simulate league"
+    },
+    "standing": {
+        "title": "Ranking",
+        "generalStanding": "Overall ranking",
+        "localStanding": "Local ranking",
+        "visitorStanding": "Visitor ranking",
+        "tableTeam": "Team",
+        "tableMatchesPlayed": "MP",
+        "tableMatchesWon": "MW",
+        "tableMatchesDrawn": "MD",
+        "tableMatchesLost": "ML",
+        "tableGoalsFor": "GF",
+        "tableGoalsAgainst": "GA",
+        "tableGoalDifference": "GD",
+        "tablePoints": "Pts.",
+        "tableForm": "Form",
+        "tableFormWin": "W",
+        "tableFormWinLabel": "Win",
+        "tableFormDraw": "D",
+        "tableFormDrawLabel": "Draw",
+        "tableFormLose": "L",
+        "tableFormLoseLabel": "Lose",
+        "tableFormNoData": "No data",
+        "tableNextRival": "Next rival"
+    },
+    "matches": {
+        "title": "Matches",
+        "matchDay": "Matchday"
+    },
+    "calculator": {
+        "title": "Calculator"
+    },
+    "footer": {
+        "title": "Legal notice",
+        "part1": "This project has been developed only for educational purposes and as part of a personal portfolio. It is a non-profit initiative.",
+        "part2": "The sporting data displayed in the app is obtained via the <0>football-data.org</0> API and is used in accordance with its terms of use.",
+        "part3": "The names of clubs, competitions, crests, logos and other trademarks mentioned or displayed in the app belong to their respective owners and are used only for identification purposes.",
+        "part4": "This project is not affiliated with, sponsored by or endorsed by <0>football-data.org</0>, LaLiga, the participating clubs or any other sporting organisation.",
+        "part5": "League information updated on"
+    }
+}

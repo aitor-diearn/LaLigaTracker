@@ -5,7 +5,8 @@ import standings from '../data/standings.json'
 import matches from '../data/matches.json'
 import teams from '../data/teams.json'
 import { Link } from "react-router-dom"
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useDocumentTitle } from "../hooks/useDocumentTitle"
+import { useTranslation } from "react-i18next"
 
 /**
  * Función que permite obtener los partidos que se mostrarán en su respectiva sección.
@@ -75,8 +76,11 @@ function Button({ text, route = '/' }) {
  */
 export default function Home() {
 
+    // Creamos el objeto para cambiar de idioma
+    const { t } = useTranslation()
+
     // Ponemos el title de la pestaña
-    useDocumentTitle('Principal')
+    useDocumentTitle(t('home.title'))
 
     // Límites de los equipos que se mostrarán en la clasificación, y del número de partidos mostrados
     const limitTeamsStanding = 10
@@ -93,7 +97,7 @@ export default function Home() {
         <>
             <Window>
                 <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">LaLigaTracker</p>
-                <p>Aplicación no oficial de datos de la liga española.</p>
+                <p>{t('home.welcome')}</p>
             </Window>
             <section className="md:ml-6 md:mr-6 grid grid-cols-1 md:grid-cols-2 gap-x-6">
                 <Window extraStyles="md:rounded-3xl">
@@ -101,7 +105,7 @@ export default function Home() {
                     <table className="w-full table-auto border-separate border-spacing-y-1.5">
                         <thead>
                             <tr>
-                                {['#', 'Equipo', 'PJ', 'DG', 'Pts.'].map((text, index) => <td key={index}>{text}</td>)}
+                                {['#', 'tableTeam', 'tableMatchesPlayed', 'tableGoalDifference', 'tablePoints'].map((text, index) => <td key={index}>{text == '#' ? '#' : t('standing.' + text)}</td>)}
                             </tr>
                         </thead>
                         <tbody>
@@ -140,11 +144,11 @@ export default function Home() {
                             })}
                         </tbody>
                     </table>
-                    <Button text="Ver más" route="/standings"/>
-                    <Button text="Haz tu predicción" route="/calculator"/>
+                    <Button text={t('home.buttonStanding')} route="/standings"/>
+                    <Button text={t('home.buttonCalculator')} route="/calculator"/>
                 </Window>
                 <Window extraStyles="md:rounded-3xl">
-                    <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">Próximos partidos</p>
+                    <p className="font-black md:text-2xl lg:text-4xl mb-4 md:mb-6">{t('home.matches')}</p>
                     <article className="flex flex-col gap-y-1 md:gap-y-2">
                         {matchesToShow.map((match, index) => {
 
@@ -154,7 +158,7 @@ export default function Home() {
                             }
                         })}
                     </article>
-                    <Button text="Ver más" route="/matches" />
+                    <Button text={t('home.buttonMatches')} route="/matches" />
                 </Window>
             </section>
         </>

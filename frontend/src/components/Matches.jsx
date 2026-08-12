@@ -6,7 +6,8 @@ import teams from '../data/teams.json'
 import metadata from '../data/metadata.json'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from "react"
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useDocumentTitle } from "../hooks/useDocumentTitle"
+import { useTranslation } from "react-i18next"
 
 /**
  * Función que gestiona el click de los botones que permiten el cambio entre jornadas.
@@ -28,8 +29,11 @@ function handleClick(matchDay, setMatchDay, addDay){
  */
 export default function Matches() {
 
+    // Creamos el objeto para cambiar de idioma
+    const { t } = useTranslation()
+
     // Ponemos el title de la pestaña
-    useDocumentTitle('Partidos')
+    useDocumentTitle(t('matches.title'))
 
     // Definimos los estados necesarios para mostrar los partidos
     const [matchDay, setMatchDay] = useState(metadata.actualMatchDay)
@@ -37,11 +41,11 @@ export default function Matches() {
     // Retornamos el componente
     return (
         <>
-            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Partidos</h1>
+            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">{t('matches.title')}</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
                 <nav className="flex justify-center gap-x-4 lg:text-2xl mb-3 md:mb-5">
                         <button className={matchDay == 1 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, false)}><i className="bi bi-chevron-double-left"></i></button>
-                        <p className="font-bold text-principal">Jornada {matchDay}</p>
+                        <p className="font-bold text-principal">{t('matches.matchDay')} {matchDay}</p>
                         <button className={matchDay == 38 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, true)}><i className="bi bi-chevron-double-right"></i></button>
                 </nav>
                 <section className="grid grid-cols-1 md:grid-rows-5 md:grid-cols-[50%_50%] md:grid-flow-col gap-x-2 gap-y-2">

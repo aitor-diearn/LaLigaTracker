@@ -5,7 +5,8 @@ import standings from '../data/standings.json'
 import teams from '../data/teams.json'
 import '../styles/standings.css'
 import { useState } from 'react'
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useDocumentTitle } from "../hooks/useDocumentTitle"
+import { useTranslation } from "react-i18next"
 
 /**
  * Función que permite obtener la infomación de la clasificación para luego mostrarse en la tabla correctamente
@@ -48,26 +49,24 @@ function handleClick(standingToShow, setStanding, setSelected){
 /**
  * Componente que permite generar los iconos con el estado de forma de cada equipo.
  * @param {string} props.teamForm Forma del equipo.
- * @example <TeamForm teamForm="WWDLW"/>
+ * @param {i18n} t Objeto que permite el cambio de idioma de la aplicación.
+ * @example <TeamForm teamForm="WWDLW" t={t}/>
  */
-function TeamForm({ teamForm }) {
+function TeamForm({ teamForm, t }) {
 
     // Definimos los colores que van con cada tipo de forma
     const teamFormColors = {
         W: {
             color: "bg-victory",
-            label: "V",
-            title: "Victoria",
+            label: "tableFormWin",
         },
         D: {
             color: "bg-draw",
-            label: "E",
-            title: "Empate",
+            label: "tableFormDraw",
         },
         L: {
             color: "bg-defeat",
-            label: "D",
-            title: "Derrota",
+            label: "tableFormLose",
         },
     };
 
@@ -80,10 +79,10 @@ function TeamForm({ teamForm }) {
             {teamForm.map((result, index) => (
                 <span
                     key={index}
-                    title={teamFormColors[result].title}
+                    title={t('standing.' + teamFormColors[result].label + 'Label')}
                     className={className + teamFormColors[result].color}
                 >
-                    {teamFormColors[result].label}
+                    {t('standing.' + teamFormColors[result].label)}
                 </span>
             ))}
         </div>
@@ -96,8 +95,11 @@ function TeamForm({ teamForm }) {
  */
 export default function Standings() {
 
+    // Creamos el objeto para cambiar de idioma
+    const { t } = useTranslation()
+
     // Ponemos el title de la pestaña
-    useDocumentTitle('Clasificación')
+    useDocumentTitle(t('standing.title'))
 
     // Creamos estados para almacenar la clasificación y mostrar, de manera gráfica, cual se está viendo
     const [standing, setStanding] = useState(getDataStanding('general'))
@@ -129,18 +131,18 @@ export default function Standings() {
     // Retornamos el componente
     return (
         <>
-            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">Clasificación</h1>
+            <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">{t('standing.title')}</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
                 <nav className="flex flex-col gap-y-2 sm:flex-row justify-between mb-2">
                     {
-                        ['general', 'local', 'visitor'].map((text, index) => <button key={index} className={selected == text ? "font-bold text-principal" : ""} onClick={e => handleClick(text, setStanding, setSelected)}><span className="text-sm md:text-base lg:text-lg xl:text-xl">Clasificación {text == 'visitor' ? 'visitante' : text}</span></button>)
+                        ['general', 'local', 'visitor'].map((text, index) => <button key={index} className={selected == text ? "font-bold text-principal" : ""} onClick={e => handleClick(text, setStanding, setSelected)}><span className="text-sm md:text-base lg:text-lg xl:text-xl">{t('standing.' + text + 'Standing')}</span></button>)
                     }
                 </nav>
                 <hr/>
                 <table className="w-full table-auto border-separate border-spacing-y-1.5 text-sm md:text-base lg:text-lg xl:text-xl">
                     <thead>
                         <tr>
-                            {['#', 'Equipo', 'PJ', 'PG', 'PE', 'PP', 'GF', 'GC', 'DG', 'Pts.', 'Forma', 'Próximo rival'].map((text, index) => <td key={index} className={arrayStyleColsTable[index]}>{text}</td>)}
+                            {['#', 'tableTeam', 'tableMatchesPlayed', 'tableMatchesWon', 'tableMatchesDrawn', 'tableMatchesLost', 'tableGoalsFor', 'tableGoalsAgainst', 'tableGoalDifference', 'tablePoints', 'tableForm', 'tableNextRival'].map((text, index) => <td key={index} className={arrayStyleColsTable[index]}>{text == '#' ? '#' : t('standing.' + text)}</td>)}
                         </tr>
                     </thead>
                     <tbody>
@@ -177,7 +179,7 @@ export default function Standings() {
                                 <td>{s.goalsAgainst}</td>
                                 <td>{s.goalsDiff}</td>
                                 <td className="font-bold">{s.points}</td>
-                                <td className={styleTeamForm}>{s.teamForm.length > 0 ? <TeamForm teamForm={s.teamForm}/> : "Sin info"}</td>
+                                <td className={styleTeamForm}>{s.teamForm.length > 0 ? <TeamForm teamForm={s.teamForm} t={t}/> : t('standing.tableFormNoData')}</td>
                                 <td>
                                     <span className="inline-block lg:hidden whitespace-nowrap">{s.nextRivalTla}</span>
                                     <span className="hidden lg:inline-block whitespace-nowrap">{s.nextRivalName}</span>
