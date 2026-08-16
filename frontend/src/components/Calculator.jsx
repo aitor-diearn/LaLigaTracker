@@ -262,8 +262,8 @@ function updateMatches(matchDay, homeTeamId, awayTeamId, goals, field, setAllMat
         ...allMatches,
         [matchDay]: allMatches[matchDay].map(match =>
 
-            // Comprobamos si los ids de los equipos coinciden con los partidos modificados, y miramos si se indico borrado o no de datos
-            match.homeTeamId == homeTeamId && match.awayTeamId == awayTeamId ? {
+            // Comprobamos si los ids de los equipos coinciden con los partidos modificados, el partido no se finalizó, y miramos si se indico borrado o no de datos
+            match.homeTeamId == homeTeamId && match.awayTeamId == awayTeamId && match.status != 'finished' ? {
                 ...match,
                 score: field == 'delete' ? {
                     home: null,
