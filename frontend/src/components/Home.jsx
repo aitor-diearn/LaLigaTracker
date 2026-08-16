@@ -16,9 +16,9 @@ import { useTranslation } from "react-i18next"
  * @param {String} status Estado del partido: planificado (scheduled) o finalizado (finished).
  */
 function getMatchesToShow(matchesToShow, matches, teams, status) {
-
+    
     // Dependiendo del status, el bucle se hará del 1º partido al último o inverso
-    for (let i = status == 'scheduled' ? 1 : 38; status == 'scheduled' ? i <= 38 : i >= 1; status == 'scheduled' ? i++ : i--) {
+    for (let i = status != 'finished' ? 1 : 38; status != 'finished' ? i <= 38 : i >= 1; status != 'finished' ? i++ : i--) {
 
         // Revisamos que no haya ya 30 partidos introducidos para tener suficientes para mostrar
         if (matchesToShow.length >= 30) {
@@ -51,7 +51,7 @@ function getMatchesToShow(matchesToShow, matches, teams, status) {
         }
 
         // Ordenamos los partidos para que aparezcan siempre los más antiguos primero, y evitar problemas con los aplazados
-        matchesToShow.sort((a, b) => status == 'scheduled' ? new Date(a.dateTime) > new Date(b.dateTime) : new Date(a.dateTime) < new Date(b.dateTime) 
+        matchesToShow.sort((a, b) => status != 'finished' ? new Date(a.dateTime) > new Date(b.dateTime) : new Date(a.dateTime) < new Date(b.dateTime) 
         )
     }
 }
@@ -88,7 +88,7 @@ export default function Home() {
 
     // Generamos el array de los partidos a mostrar
     const matchesToShow = []
-    for(let t of ['scheduled', 'finished']){
+    for(let t of ['timed', 'scheduled', 'finished']){
         getMatchesToShow(matchesToShow, matches, teams, t)
     }
 
