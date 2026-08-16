@@ -26,7 +26,7 @@
         "tableFormWinLabel": "Victoria",
         "tableFormDraw": "E",
         "tableFormDrawLabel": "Empate",
-        "tableFormLose": "L",
+        "tableFormLose": "D",
         "tableFormLoseLabel": "Derrota",
         "tableFormNoData": "Sin datos",
         "tableNextRival": "Próximo rival"
@@ -43,7 +43,7 @@
         "part1": "Este proyecto ha sido desarrollado con fines exclusivamente educativos y como parte de un portfolio personal. No tiene ánimo de lucro.",
         "part2": "Los datos deportivos mostrados en la aplicación se obtienen a través de la API de <0>football-data.org</0>, y se utilizan de acuerdo con sus condiciones de uso.",
         "part3": "Los nombres de los clubes, competiciones, escudos, logotipos y demás marcas mencionadas o mostradas en la aplicación pertenecen a sus respectivos propietarios y se utilizan únicamente con fines identificativos.",
-        "part4": "Este proyecto no está afiliado, patrocinado ni respaldado por <0>football-data.org</0>,, LaLiga, los clubes participantes ni ninguna otra entidad deportiva.",
+        "part4": "Este proyecto no está afiliado, patrocinado ni respaldado por <0>football-data.org</0>, LaLiga, los clubes participantes ni ninguna otra entidad deportiva.",
         "part5": "Información de la liga actualizada a"
     }
 }
