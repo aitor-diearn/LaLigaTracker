@@ -405,7 +405,7 @@ function updateMatches(matchDay, homeTeamId, awayTeamId, goals, field, setAllMat
  * @returns Código HTML del botón.
  */
 function generateButtonsMatches(icon, className, onClick){
-    return <button className={className} onClick={onClick}><i className={icon}></i></button>
+    return <button className={className + " cursor-pointer"} onClick={onClick}><i className={icon}></i></button>
 }
 
 /**

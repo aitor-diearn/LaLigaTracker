@@ -44,9 +44,9 @@ export default function Matches() {
             <h1 className="text-xl md:text-3xl xl:text-4xl text-center font-bold mt-6">{t('matches.title')}</h1>
             <Window extraStyles="md:ml-6 md:mr-6 md:rounded-3xl">
                 <nav className="flex justify-center gap-x-4 lg:text-2xl mb-3 md:mb-5">
-                        <button className={matchDay == 1 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, false)}><i className="bi bi-chevron-double-left"></i></button>
+                        <button className={matchDay == 1 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, false)}><i className="bi bi-chevron-double-left cursor-pointer"></i></button>
                         <p className="font-bold text-principal">{t('matches.matchDay')} {matchDay}</p>
-                        <button className={matchDay == 38 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, true)}><i className="bi bi-chevron-double-right"></i></button>
+                        <button className={matchDay == 38 ? "hidden" : ""} onClick={() => handleClick(matchDay, setMatchDay, true)}><i className="bi bi-chevron-double-right cursor-pointer"></i></button>
                 </nav>
                 <section className="grid grid-cols-1 md:grid-rows-5 md:grid-cols-[50%_50%] md:grid-flow-col gap-x-2 gap-y-2">
                     {matches['matchDay' + matchDay].map((match, index) => {
