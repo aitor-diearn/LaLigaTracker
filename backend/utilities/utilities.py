@@ -4,7 +4,7 @@ from itertools import chain
 
 def formatOriginalData(matches: json) -> tuple:
     """
-        Función que permite obtener la clasificación, equipos y partidos en un formato JSON legible por el front-end a partir de los partidos recibidos de la API.
+        Función que permite obtener la clasificación, equipos y partidos en un formato JSON legible por el front-end a partir de los datos recibidos de la API.
 
         Parameters:
             matches(json): JSON con todos los partidos obtenidos de la API.
