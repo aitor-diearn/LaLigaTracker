@@ -60,8 +60,8 @@ function simulateStandings(standingGeneral, allMatches) {
     );
 
     // Recorremos todos los partidos
-    Object.values(allMatches).forEach(matches => {
-        matches.forEach(match => {
+    Object.values(allMatches).forEach(simulatedMatches => {
+        simulatedMatches.forEach(match => {
 
             // Ignoramos los partidos finalizados y sin simular
             if (match.status === "finished" || match.score.home == null || match.score.away == null){
@@ -72,25 +72,108 @@ function simulateStandings(standingGeneral, allMatches) {
             const homeTeam = teamsList.get(match.homeTeamId);
             const awayTeam = teamsList.get(match.awayTeamId);
 
-            // Comprobamos el número de goles para ver quien gana y quien pierde, además de añadirlos a cada equipo
+            // Comprobamos el número de goles de cada equipo
             const homeGoals = Number(match.score.home);
             const awayGoals = Number(match.score.away);
 
-            addGoals(homeTeam, homeGoals, awayGoals)
-            addGoals(awayTeam, awayGoals, homeGoals)
+            // Comprobamos si el partido está planificado o en juego ahora mismo
+            if(match.status == 'timed' || match.status == 'scheduled'){
 
-            if (homeGoals > awayGoals) {
-                addWin(homeTeam)
-                addLose(awayTeam)
-            } else if (homeGoals < awayGoals) {
-                addLose(homeTeam)
-                addWin(awayTeam)
-            } else {
-                addDraw(homeTeam)
-                addDraw(awayTeam)
+                // Añadimos los goles a cada equipo, así como indicar quien gana y quien pierde
+                addGoals(homeTeam, homeGoals, awayGoals)
+                addGoals(awayTeam, awayGoals, homeGoals)
+
+                if (homeGoals > awayGoals) {
+                    addQuitWin(homeTeam, true)
+                    addQuitLose(awayTeam, true)
+                } else if (homeGoals < awayGoals) {
+                    addQuitLose(homeTeam, true)
+                    addQuitWin(awayTeam, true)
+                } else {
+                    addQuitDraw(homeTeam, true)
+                    addQuitDraw(awayTeam, true)
+                }
+            }else{
+
+                // Variables para almacenar los goles iniciales y el ganador actual del partido
+                let startHomeGoals = 0
+                let startAwayGoals = 0
+                let initialWinner = 'local'
+
+                // Recorremos los partidos originales, buscando el que esté en vivo, y guardando los goles y ganador actual de este en variables
+                Object.values(matches).forEach(originalMatches => {
+                    originalMatches.forEach(m => {
+                        if(m.homeTeamId == match.homeTeamId && m.awayTeamId == match.awayTeamId){
+                            startHomeGoals = m.score.home
+                            startAwayGoals = m.score.away
+                            if (startHomeGoals > startAwayGoals) {
+                                initialWinner = 'local'
+                            } else if (startHomeGoals < startAwayGoals) {
+                                initialWinner = 'visitor'
+                            } else {
+                                initialWinner = 'draw'
+                            }
+                        }
+                    })
+                })
+
+                // Comprobamos la diferencia de goles entre el resultado original y el indicado por el usuario, y la añadimos a cada equipo
+                const homeGoalsDifference = homeGoals - startHomeGoals
+                const awayGoalsDiffernece = awayGoals - startAwayGoals
+                addGoals(homeTeam, homeGoalsDifference, awayGoalsDiffernece)
+                addGoals(awayTeam, awayGoalsDiffernece, homeGoalsDifference)
+
+                // Solamente añadimos y quitamos victorias/empates/derrotas si el equipo que iba ganando de inicio no es el mismo que el indicado por el usuario
+                if (homeGoals > awayGoals && initialWinner != 'local') {
+                    addQuitWin(homeTeam, true)
+                    addQuitLose(awayTeam, true)
+
+                    if(startHomeGoals < startAwayGoals){
+                        addQuitWin(awayTeam, false)
+                        if(initialWinner == 'visitor'){
+                            addQuitLose(homeTeam, false)
+                        }else{
+                            addQuitDraw(homeTeam, false)
+                        }
+                    }else if(startHomeGoals == startAwayGoals){
+                        addQuitDraw(homeTeam, false)
+                        addQuitDraw(awayTeam, false)
+                        if(initialWinner == 'visitor'){
+                            addQuitLose(homeTeam, false)
+                        }
+                    }
+                } else if (homeGoals < awayGoals && initialWinner != 'visitor') {
+                    addQuitLose(homeTeam, true)
+                    addQuitWin(awayTeam, true)
+
+                    if(startHomeGoals > startAwayGoals){
+                        addQuitWin(homeTeam, false)
+                        if(initialWinner == 'local'){
+                            addQuitLose(awayTeam, false)
+                        }else{
+                            addQuitDraw(awayTeam, false)
+                        }
+                    }else if(startHomeGoals == startAwayGoals){
+                        addQuitDraw(homeTeam, false)
+                        addQuitDraw(awayTeam, false)
+                        if(initialWinner == 'local'){
+                            addQuitLose(awayTeam, false)
+                        }
+                    }
+                } else if(homeGoals == awayGoals && initialWinner != 'draw') {
+                    addQuitDraw(homeTeam, true)
+                    addQuitDraw(awayTeam, true)
+
+                    if(startHomeGoals > startAwayGoals){
+                        addQuitWin(homeTeam, false)
+                        addQuitLose(awayTeam, false)
+                    }else if(startHomeGoals < startAwayGoals){
+                        addQuitWin(awayTeam, false)
+                        addQuitLose(homeTeam, false)
+                    }
+                }
             }
         });
-
     });
 
     // Revisamos posibles empates entre los equipos
@@ -141,33 +224,36 @@ function simulateStandings(standingGeneral, allMatches) {
     });
 
     // Retornamos la clasificación simulada
-    return copyStandingGeneral;
+    return copyStandingGeneral
 }
 
 /**
- * Función que permite añadir una victoria a un equipo.
- * @param {Object} team Equipo al que se añadirá la victoria.
+ * Función que permite añadir o quitar una victoria a un equipo.
+ * @param {Object} team Equipo al que se añadirá o quitará la victoria.
+ * @param {boolean} addWin True si se quiere añadir la victoria, y false en caso contrario.
  */
-function addWin(team){
-    team.matches.win++;
-    team.points += 3;
+function addQuitWin(team, addWin){
+    addWin ? team.matches.win++ : team.matches.win--
+    addWin ? team.points += 3 : team.points -= 3 
 }
 
 /**
- * Función que permite añadir un empate a un equipo.
- * @param {Object} team Equipo al que se añadirá el empate.
+ * Función que permite añadir o quitar un empate a un equipo.
+ * @param {Object} team Equipo al que se añadirá o quitará el empate.
+ * @param {boolean} addDraw True si se quiere añadir el empate, y false en caso contrario.
  */
-function addDraw(team){
-    team.matches.draw++;
-    team.points++;
+function addQuitDraw(team, addDraw){
+    addDraw ? team.matches.draw++ : team.matches.draw--
+    addDraw ? team.points++ : team.points--
 }
 
 /**
- * Función que permite añadir una derrota a un equipo.
- * @param {Object} team Equipo al que se añadirá la derrota.
+ * Función que permite añadir o quitar una derrota a un equipo.
+ * @param {Object} team Equipo al que se añadirá o quitará la derrota.
+ * @param {boolean} addLose True si se quiere añadir la derrota, y false en caso contrario.
  */
-function addLose(team){
-    team.matches.lose++;
+function addQuitLose(team, addLose){
+    addLose ? team.matches.lose++ : team.matches.lose--
 }
 
 /**
@@ -258,24 +344,57 @@ function updateMatches(matchDay, homeTeamId, awayTeamId, goals, field, setAllMat
     const otherField = field != 'away' ? 'away' : 'home'
 
     // Actualizamos los partidos
-    setAllMatches(allMatches => ({
-        ...allMatches,
-        [matchDay]: allMatches[matchDay].map(match =>
+    setAllMatches(allMatches => {
 
-            // Comprobamos si los ids de los equipos coinciden con los partidos modificados, el partido no se finalizó, y miramos si se indico borrado o no de datos
-            match.homeTeamId == homeTeamId && match.awayTeamId == awayTeamId && match.status != 'finished' ? {
-                ...match,
-                score: field == 'delete' ? {
-                    home: null,
-                    away: null
-                } : {
-                    [field]: Number(goals),
-                    [otherField]: match.score[otherField] == null ? 0 : match.score[otherField]
-                },
-            }
-                : match
-        )
-    }))
+        // Clonamos la jornada que se va a revisar
+        const fixture = structuredClone(allMatches[matchDay])
+
+        // Revisamos que campo se ha pasado por parámetro
+        if(field == 'delete'){
+
+            // Recorremos los partidos de la jornada
+            fixture.map(match => {
+                if(match.status == 'timed' || match.status == 'scheduled'){
+
+                    // Reseteamos el marcador para todos los partidos que no se han jugado
+                    match.score = {
+                        home: null,
+                        away: null
+                    }
+                }else if(match.status != 'finished'){
+
+                    // Recorremos los partidos originales, con el fin de poner el resultado original a los que están en juego
+                    Object.values(matches).forEach(originalMatches => {
+                        originalMatches.forEach(m => {
+                            if(m.homeTeamId == match.homeTeamId && m.awayTeamId == match.awayTeamId){
+                                match.score = {
+                                    home: m.score.home,
+                                    away: m.score.away
+                                }
+                            }
+                        })
+                    })
+                }
+            })
+        }else{
+
+            // Indicamos los goles que ha puesto el usuario en el partido que ha rellenado
+            fixture.map(match => {
+                if(match.homeTeamId == homeTeamId && match.awayTeamId == awayTeamId){
+                    match.score = {
+                        [field]: Number(goals),
+                        [otherField]: match.score[otherField] == null ? 0 : match.score[otherField]
+                    }
+                }
+            })
+        }
+
+        // Retornamos el nuevo objeto con todos los partidos
+        return ({
+            ...allMatches,
+            [matchDay]: fixture
+        })
+    })
 }
 
 /**
@@ -343,8 +462,7 @@ export default function Calculator() {
                     </div>
                     <section className="grid grid-cols-1 gap-x-2">
                         {allMatches['matchDay' + matchDay].map((match, index) => {
-
-                            const bgColor = match.status == 'finished' ? "bg-green-200" : ""
+                            const bgColor = match.status == 'finished' ? "bg-gray-200" : match.status != 'timed' && match.status != 'scheduled' ? "bg-green-200" : ""
                             return (
                                 <article className={"flex justify-center items-center gap-x-4 pt-1 pb-1 " + bgColor} key={index}>
                                     <p className="basis-25 md:basis-35 xl:basis-50">{formatDate(match.datetime)}</p>

@@ -89,8 +89,8 @@ def formatOriginalData(matches: json) -> tuple:
 
                 teams[teamMatch]['tla'] = match[keyTeam]['tla']
 
-        # Revisamos si el partido se ha jugado o no
-        if matchDep['status'].strip() != 'finished':
+        # Revisamos si el partido se ha jugado o no, con el fin de calcular la clasificación o indicar el próximo rival de cada equipo
+        if matchDep['status'].strip() == 'scheduled' or matchDep['status'].strip() == 'timed':
 
             # Si no se ha jugado el partido, asignamos el próximo rival al equipo si no lo tiene asignado
             addNextRival(standings['general'], listIdTeams[0], listIdTeams[1])
