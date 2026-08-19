@@ -1,0 +1,34 @@
+<!--
+    Fichero creado exclusivamente para solucionar problemas con GitHub Pages.
+    Cuando un usuario intenta recargar una página en una subpestaña, como /matches, GitHub Pages devuelve un 404, aunque la ruta existe.
+    Este fichero simplemente permite que al usuario se le redigirá a la ruta correcta.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LaLigaTracker</title>
+        <script>
+
+            // Ruta base de la aplicación
+            const base = "/LaLigaTracker/";
+
+            // Obtenemos la ruta a la que pretende acceder el usuario, quitando la ruta base de esta
+            const path = window.location.pathname.startsWith(base) ? window.location.pathname.slice(base.length) : window.location.pathname;
+
+            // Guardamos la ruta a la que pretende acceder el usuario para luego poder usarla en App.jsx
+            const search = window.location.search;
+            sessionStorage.setItem("redirect", base + path + search);
+
+            // Retornamos temporalmente a la página principal
+            window.location.replace(base);
+        </script>
+    </head>
+    <body>
+        <!--
+            No hace falta mostrar nada al usuario, ya que la aplicación redirigirá a este a una página con información.
+        -->
+    </body>
+</html>

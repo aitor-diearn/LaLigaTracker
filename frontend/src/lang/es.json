@@ -45,5 +45,10 @@
         "part3": "Los nombres de los clubes, competiciones, escudos, logotipos y demás marcas mencionadas o mostradas en la aplicación pertenecen a sus respectivos propietarios y se utilizan únicamente con fines identificativos.",
         "part4": "Este proyecto no está afiliado, patrocinado ni respaldado por <0>football-data.org</0>, LaLiga, los clubes participantes ni ninguna otra entidad deportiva.",
         "part5": "Información de la liga actualizada a"
+    },
+    "pageNotFound": {
+        "title": "Pagina no encontrada",
+        "text": "Lo sentimos, pero la página a la que está intentando acceder no existe.",
+        "button": "Ir al inicio"
     }
 }
