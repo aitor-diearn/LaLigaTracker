@@ -13,7 +13,7 @@ import Calculator from './components/Calculator'
 export default function App() {
     return (
         <div className="min-h-screen flex flex-col">
-            <BrowserRouter>
+            <BrowserRouter basename={import.meta.env.BASE_URL}>
                 <Navbar />
 
                 <main className="bg-secondary flex-1">
