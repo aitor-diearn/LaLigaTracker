@@ -30,7 +30,7 @@ function LanguageSelector() {
     // Retornamos el componente
     return (
         <select className="py-3 md:py-0" value={t.language} defaultValue={localStorage.getItem('lang')} onChange={(e) => handleChange(e.target.value)}>
-            {Object.entries(options).map(([value, text], index) => <option key={index} value={value}>{text}</option>)}
+            {Object.entries(options).map(([value, text], index) => <option key={index} value={value} className="text-black">{text}</option>)}
         </select>
     );
 }
