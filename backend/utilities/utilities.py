@@ -237,14 +237,18 @@ def solveTies(standingGeneral: dict, matchesDef: dict) -> dict:
                         'for': 0,
                         'against': 0,
                     },
-                    'pointsGeneral': points
+                    'pointsGeneral': points,
+                    'upcomingMatches': False,
+                    'teamsTied': tie
                 }
     
     # Recorremos los partidos, comprobamos que los equipos de cada uno de ellos son 2 que estén empatados
     for m in chain.from_iterable(matchesDef.values()):
         homeTeamId = m['homeTeamId']
         awayTeamId = m['awayTeamId']
-        if homeTeamId in head2head and awayTeamId in head2head and head2head[homeTeamId]['pointsGeneral'] == head2head[awayTeamId]['pointsGeneral']:
+
+        # Comprobamos que los 2 equipos estén en el diccionario de desempate, igualados a puntos, y no tengan partidos pendientes entre ellos para el duelo particular
+        if homeTeamId in head2head and awayTeamId in head2head and head2head[homeTeamId]['pointsGeneral'] == head2head[awayTeamId]['pointsGeneral'] and head2head[homeTeamId]['upcomingMatches'] == False and head2head[awayTeamId]['upcomingMatches'] == False:
 
             # Revisamos el marcador del partido para asignar las estadísticas necesarias a los equipos involucrados
             score = m['score']
@@ -258,6 +262,11 @@ def solveTies(standingGeneral: dict, matchesDef: dict) -> dict:
                     head2head[awayTeamId]['points'] += 1
                 addGoals(head2head[homeTeamId], score['home'], score['away'])
                 addGoals(head2head[awayTeamId], score['away'], score['home'])
+            else:
+
+                # Si hay algún partido pendiente, cambiamos el valor de la variable de partidos pendientes, ya que no se puede aplicar desempate por duelos directos si hay partidos que faltan por jugar entre los equipos empatados
+                for team in head2head[homeTeamId]['teamsTied']:
+                    head2head[team]['upcomingMatches'] = True
 
     # Retornamos el array con los duelos directos en los empates
     return head2head
@@ -293,9 +302,9 @@ def head2headComparation(teamId: int, head2head: dict) -> tuple:
                 - int: Goles a favor.
     """
 
-    # Comprobamos que exista el equipo en los duelos
+    # Comprobamos que exista el equipo en los duelos, y que no tenga partidos pendientes por disputar con los equipos con los que está empatado
     h2h = head2head.get(teamId)
-    if not h2h:
+    if not h2h or h2h.get('upcomingMatches') == True:
         return (0, 0, 0)
 
     # Obtenemos los goles

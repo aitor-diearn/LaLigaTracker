@@ -187,8 +187,8 @@ function simulateStandings(standingGeneral, allMatches) {
             return b.points - a.points;
         }
 
-        // Comprobamos si los equipos que se están comparando están igualados a puntos
-        if (a.teamId in head2head && b.teamId in head2head && head2head[a.teamId]['pointsGeneral'] == head2head[b.teamId]['pointsGeneral']){
+        // Comprobamos si los equipos que se están comparando están igualados a puntos, y que no tengan partidos pendientes por disputar con los equipos con los que están empatado
+        if (a.teamId in head2head && b.teamId in head2head && head2head[a.teamId]['pointsGeneral'] == head2head[b.teamId]['pointsGeneral'] && !head2head[a.teamId]['upcomingMatches'] && !head2head[b.teamId]['upcomingMatches']){
 
             // Ordenación por puntos en duelos directos
             if(head2head[a.teamId]['points'] !== head2head[b.teamId]['points']){
@@ -295,7 +295,9 @@ function head2headTeams(allMatches, copyStandingGeneral){
                     for: 0,
                     against: 0,
                 },
-                pointsGeneral: tie[0]
+                pointsGeneral: tie[0],
+                upcomingMatches: false,
+                teamsTied: tie[1]
             })
         }
     })
@@ -305,7 +307,9 @@ function head2headTeams(allMatches, copyStandingGeneral){
         matches.forEach(match => {
             const homeTeamId = match['homeTeamId']
             const awayTeamId = match['awayTeamId']
-            if(homeTeamId in head2head && awayTeamId in head2head && head2head[homeTeamId]['pointsGeneral'] == head2head[awayTeamId]['pointsGeneral']){
+
+            // Comprobamos que los 2 equipos estén en el diccionario de desempate, igualados a puntos, y no tengan partidos pendientes entre ellos para el duelo particular
+            if(homeTeamId in head2head && awayTeamId in head2head && head2head[homeTeamId]['pointsGeneral'] == head2head[awayTeamId]['pointsGeneral'] && !head2head[homeTeamId]['upcomingMatches'] && !head2head[awayTeamId]['upcomingMatches']){
 
                 // Revisamos el marcador del partido para asignar las estadísticas necesarias a los equipos involucrados
                 const score = match.score
@@ -320,6 +324,10 @@ function head2headTeams(allMatches, copyStandingGeneral){
                     }
                     addGoals(head2head[homeTeamId], score.home, score.away)
                     addGoals(head2head[awayTeamId], score.away, score.home)
+                }else{
+
+                    // Si hay algún partido pendiente, cambiamos el valor de la variable de partidos pendientes, ya que no se puede aplicar desempate por duelos directos si hay partidos que faltan por jugar entre los equipos empatados
+                    head2head[homeTeamId]['teamsTied'].forEach(team => head2head[team]['upcomingMatches'] = true)
                 }
             }
         })
