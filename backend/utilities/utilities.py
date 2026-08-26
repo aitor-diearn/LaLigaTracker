@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import datetime, UTC
 from itertools import chain
 
@@ -69,7 +70,7 @@ def formatOriginalData(matches: json) -> tuple:
                 'away': match['score']['fullTime']['away'],
             },
             'datetime': match['utcDate'],
-            'status': match['status'].lower()
+            'status': 'timed' if re.search('^\d{2}', match['status']) else match['status'].lower()
         }
 
         # Añadimos el partido a su jornada correspondiente
