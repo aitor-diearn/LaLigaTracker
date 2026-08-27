@@ -13,6 +13,8 @@ La parte front-end es una aplicación hecha en React, versión 19.2.6, y creada 
 
 La aplicación se encuentra publicada en GitHub Pages mediante CI/CD, usando GitHub Actions. La aplicación se despliega cada 2 horas, o cada vez que se lleva a cabo una acción de push sobre la rama master, para reflejar los cambios realizados o actualizar los datos.
 
+Para ver la página, <a href="https://aitor-diearn.github.io/LaLigaTracker/">pulse aquí.</a>
+
 ### Aviso legal
 
 Este proyecto ha sido desarrollado con fines exclusivamente educativos y como parte de un portfolio personal. No tiene ánimo de lucro.
@@ -36,6 +38,8 @@ The back-end is developed with Python. This part retrieves data from the <a href
 The front-end is developed with React, version 19.2.6, and created with Vite. In addition, the Tailwind CSS library is used to style the application.
 
 The application is published on GitHub Pages via CI/CD, using GitHub Actions. The application is deployed every 2 hours, or whenever a push is made to the master branch, to reflect any changes made or to update the data.
+
+To view the page, <a href="https://aitor-diearn.github.io/LaLigaTracker/">click here.</a>
 
 ### Legal notice
 
