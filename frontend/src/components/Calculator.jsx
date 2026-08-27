@@ -410,10 +410,13 @@ function updateMatches(matchDay, homeTeamId, awayTeamId, goals, field, setAllMat
  * @param {string} icon Icono que se mostrará en los botones.
  * @param {string} className Valor del atributo class del elemento.
  * @param {function} onClick Evento de click cuando se pulsa el botón.
+ * @param {string} text Texto que se pondrá debajo del botón si se indica un valor a este parámetro. Por defecto, tiene como valor una cadena vacía.
  * @returns Código HTML del botón.
  */
-function generateButtonsMatches(icon, className, onClick){
-    return <button className={className + " cursor-pointer"} onClick={onClick}><i className={icon}></i></button>
+function generateButtonsMatches(icon, className, onClick, text = ""){
+    return <button className={className + " cursor-pointer"} onClick={onClick}><i className={icon}></i>{
+        text != "" ? <p>{text}</p> : ""
+    }</button>
 }
 
 /**
@@ -427,7 +430,8 @@ function generateButtonsMatches(icon, className, onClick){
  */
 function generateInputsMatches(value, matchDay, match, field, setAllMatches){
     const padding = field == 'home' ? 'pl-2' : 'pr-2' 
-    return <input type="text" inputMode="numeric" className={"inline-block w-6 md:w-8 text-center read-only:cursor-default " + padding} min="0" step="1" value={value != null ? value : ''} onChange={(e) => handleChange(e.target.value, matchDay, match, field, setAllMatches)} readOnly={match.status == 'finished' ? true : false}/>
+    const border = match.status == 'scheduled' || match.status == 'timed' ? 'bg-gray-300 ' : ''
+    return <input type="text" inputMode="numeric" className={"inline-block w-6 md:w-8 text-center read-only:cursor-default " + border + padding} min="0" step="1" value={value != null ? value : ''} onChange={(e) => handleChange(e.target.value, matchDay, match, field, setAllMatches)} readOnly={match.status == 'finished' ? true : false}/>
 }
 
 /**
@@ -461,16 +465,23 @@ export default function Calculator() {
                         <p className="font-bold text-principal">{t('matches.matchDay')} {matchDay}</p>
                         {generateButtonsMatches("bi bi-chevron-double-right", matchDay == 38 ? "hidden" : "", () => handleClick(matchDay, setMatchDay, true))}
                     </nav>
-                    <div>
-                        {generateButtonsMatches("bi bi-arrow-repeat text-lg md:text-xl xl:text-3xl text-principal", "mb-2", () => {
+                    <div className="flex items-center justify-center gap-x-3">
+                        {generateButtonsMatches("bi bi-arrow-clockwise text-lg md:text-xl xl:text-3xl text-orange-400", "mb-2", () => {
                             allMatches['matchDay' + matchDay].forEach(match => {
                                 updateMatches('matchDay' + matchDay, match.homeTeamId, match.awayTeamId, null, 'delete', setAllMatches)
                             })
-                        })}
+                        }, t('calculator.resetMatchDay'))}
+                        {generateButtonsMatches("bi bi-trash text-lg md:text-xl xl:text-3xl text-principal", "mb-2", () => {
+                            Object.entries(allMatches).forEach(match => {
+                                match[1].forEach(m => {
+                                    updateMatches(match[0], m.homeTeamId, m.awayTeamId, null, 'delete', setAllMatches)
+                                })
+                            })
+                        }, t('calculator.deleteAll'))}
                     </div>
                     <section className="grid grid-cols-1 gap-x-2">
                         {allMatches['matchDay' + matchDay].map((match, index) => {
-                            const bgColor = match.status == 'finished' ? "bg-gray-200" : match.status != 'timed' && match.status != 'scheduled' ? "bg-green-200" : ""
+                            const bgColor = match.status == 'finished' ? "bg-gray-300" : match.status != 'timed' && match.status != 'scheduled' ? "bg-green-300" : ""
                             return (
                                 <article className={"flex justify-center items-center gap-x-4 pt-1 pb-1 " + bgColor} key={index}>
                                     <p className="basis-25 md:basis-35 xl:basis-50">{formatDate(match.datetime)}</p>

@@ -36,7 +36,9 @@
         "matchDay": "Jornada"
     },
     "calculator": {
-        "title": "Calculadora"
+        "title": "Calculadora",
+        "resetMatchDay": "Reiniciar jornada",
+        "deleteAll": "Borrar todo"
     },
     "footer": {
         "title": "Aviso legal",

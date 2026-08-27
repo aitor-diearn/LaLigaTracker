@@ -36,7 +36,9 @@
         "matchDay": "Matchday"
     },
     "calculator": {
-        "title": "Calculator"
+        "title": "Calculator",
+        "resetMatchDay": "Reset matchday",
+        "deleteAll": "Clean all"
     },
     "footer": {
         "title": "Legal notice",
