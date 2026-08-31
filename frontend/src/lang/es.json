@@ -29,7 +29,8 @@
         "tableFormLose": "D",
         "tableFormLoseLabel": "Derrota",
         "tableFormNoData": "Sin datos",
-        "tableNextRival": "Próximo rival"
+        "tableNextRival": "Próximo rival",
+        "tableNextRivalNotExist": "Sin datos"
     },
     "matches": {
         "title": "Partidos",

@@ -29,7 +29,8 @@
         "tableFormLose": "L",
         "tableFormLoseLabel": "Lose",
         "tableFormNoData": "No data",
-        "tableNextRival": "Next rival"
+        "tableNextRival": "Next rival",
+        "tableNextRivalNotExist": "No data"
     },
     "matches": {
         "title": "Matches",

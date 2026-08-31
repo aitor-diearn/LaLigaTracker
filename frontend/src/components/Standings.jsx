@@ -29,8 +29,8 @@ function getDataStanding(standing, element = null){
             goalsDiff: teamStanding.goals.for - teamStanding.goals.against,
             points: teamStanding.points,
             teamForm: teamStanding.form.split(''),
-            nextRivalName: teams[teamStanding.nextRival].name,
-            nextRivalTla: teams[teamStanding.nextRival].tla
+            nextRivalName: teamStanding.nextRival != null ? teams[teamStanding.nextRival].name : null,
+            nextRivalTla: teamStanding.nextRival != null ? teams[teamStanding.nextRival].tla : null, 
         }
     })
 }
@@ -181,8 +181,8 @@ export default function Standings() {
                                 <td className="font-bold">{s.points}</td>
                                 <td className={styleTeamForm}>{s.teamForm.length > 0 ? <TeamForm teamForm={s.teamForm} t={t}/> : t('standing.tableFormNoData')}</td>
                                 <td>
-                                    <span className="inline-block lg:hidden whitespace-nowrap">{s.nextRivalTla}</span>
-                                    <span className="hidden lg:inline-block whitespace-nowrap">{s.nextRivalName}</span>
+                                    <span className="inline-block lg:hidden whitespace-nowrap">{s.nextRivalTla == null ? t('standing.tableNextRivalNotExist') : s.nextRivalTla}</span>
+                                    <span className="hidden lg:inline-block whitespace-nowrap">{s.nextRivalName == null ? t('standing.tableNextRivalNotExist') : s.nextRivalName}</span>
                                 </td>
                             </tr>
                         )})}
