@@ -130,8 +130,8 @@
         "crest": {
             "principal": "#FFFFFF",
             "secondary": "#317753",
-            "pattern": "vertical",
-            "stripeSizes": [20, 10, 20]
+            "pattern": "horizontal",
+            "stripeSizes": [15, 20, 15]
         }
     },
     "RC Celta de Vigo": {
@@ -175,6 +175,186 @@
         "crest": {
             "principal": "#FFFFFF",
             "secondary": "#01A82E",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "Albacete Balompi\u00e9":{
+        "id": 21,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#FFFFFF",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "UD Almer\u00eda": {
+        "id": 22,
+        "crest": {
+            "principal": "#F32F30",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "FC Andorra": {
+        "id": 23,
+        "crest": {
+            "principal": "#1B5EA4",
+            "secondary": "#1B5EA4",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "Burgos CF": {
+        "id": 24,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#000000",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "C\u00e1diz CF": {
+        "id": 25,
+        "crest": {
+            "principal": "#DECB03",
+            "secondary": "#011FFC",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "CD Castell\u00f3n": {
+        "id": 26,
+        "crest": {
+            "principal": "#000000",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "AD Ceuta FC": {
+        "id": 27,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#FFFFFF",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "C\u00f3rdoba CF": {
+        "id": 28,
+        "crest": {
+            "principal": "#008639",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "SD Eibar": {
+        "id": 29,
+        "crest": {
+            "principal": "#590622",
+            "secondary": "#313957",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "CD Eldense": {
+        "id": 30,
+        "crest": {
+            "principal": "#041D6C",
+            "secondary": "#860629",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Girona FC": {
+        "id": 31,
+        "crest": {
+            "principal": "#D0161B",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "Granada CF": {
+        "id": 32,
+        "crest": {
+            "principal": "#A40B1F",
+            "secondary": "#FFFFFF",
+            "pattern": "horizontal",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "UD Las Palmas": {
+        "id": 33,
+        "crest": {
+            "principal": "#F8D20D",
+            "secondary": "#015BA8",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "CD Legan\u00e9s": {
+        "id": 34,
+        "crest": {
+            "principal": "#1D3D78",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "RCD Mallorca": {
+        "id": 35,
+        "crest": {
+            "principal": "#DB0332",
+            "secondary": "#000000",
+            "pattern": "vertical",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "Real Oviedo": {
+        "id": 36,
+        "crest": {
+            "principal": "#025DAC",
+            "secondary": "#025DAC",
+            "pattern": "solid",
+            "stripeSizes": [50]
+        }
+    },
+    "Real Valladolid CF": {
+        "id": 37,
+        "crest": {
+            "principal": "#A537FA",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "CE Sabadell FC": {
+        "id": 38,
+        "crest": {
+            "principal": "#172C6E",
+            "secondary": "#FFFFFF",
+            "pattern": "quarters",
+            "stripeSizes": [25, 25]
+        }
+    },
+    "Real Sporting de Gij\u00f3n": {
+        "id": 39,
+        "crest": {
+            "principal": "#E70027",
+            "secondary": "#FFFFFF",
+            "pattern": "vertical",
+            "stripeSizes": [10, 10, 10, 10, 10]
+        }
+    },
+    "CD Tenerife": {
+        "id": 40,
+        "crest": {
+            "principal": "#FFFFFF",
+            "secondary": "#05289E",
             "pattern": "vertical",
             "stripeSizes": [25, 25]
         }

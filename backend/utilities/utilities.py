@@ -46,7 +46,8 @@ def formatOriginalData(matches: json) -> tuple:
                         'against': 0
                     },
                     'form': '',
-                    'nextRival': None
+                    'nextRival': None,
+                    'existsThisSeason': False
                 }
 
         teams[teamsInfo[team]['id']] = {
@@ -72,6 +73,11 @@ def formatOriginalData(matches: json) -> tuple:
             'datetime': match['utcDate'],
             'status': 'timed' if re.search(r'^\d{2}', match['status']) else match['status'].lower()
         }
+
+        # Indicamos en las clasificaciones que el equipo existe esta temporada para evitar eliminarlo a futuro
+        for keyStanding in ['general', 'local', 'visitor']:
+            for keyTeam in [teamsInfo[match['homeTeam']['name']]['id'], teamsInfo[match['awayTeam']['name']]['id']]:
+                standings[keyStanding][keyTeam]['existsThisSeason'] = True
 
         # Añadimos el partido a su jornada correspondiente
         matchday = match['matchday']
@@ -124,7 +130,10 @@ def formatOriginalData(matches: json) -> tuple:
             for key in ['general', 'visitor']: 
                 addGoals(standings[key][listIdTeams[1]], scoreMatch['away'], scoreMatch['home'])
 
-    # Ordenamos los equipos por clave y formateamos las clasificaciones
+    # Eliminamos los equipos que no aparecen en esta temporada, los ordenamos por clave y formateamos las clasificaciones
+    for team in list(standings['general'].values()):
+        if team['existsThisSeason'] == False:
+            del teams[team['teamId']]
     teams = dict(sorted(teams.items()))
     sanitizeStandings(standings)
 
@@ -195,15 +204,16 @@ def addNextRival(standing: dict, team: int, rival: int):
 
 def sanitizeStandings(standings: dict):
     """
-        Función que formatea de forma correcta las clasificaciones, reduciendo la longitud de la forma del equipo, y cambiando de diccionarios a listas.
+        Función que formatea de forma correcta las clasificaciones, reduciendo la longitud de la forma del equipo, y cambiando de diccionarios a listas, además de eliminar todos aquellos que no están en esta temporada en la competición, y de eliminar atributos innecesarios de las clasificaciones.
 
         Parameters:
             standings (dict): Diccionario con todas las clasificaciones a formatear.
     """
 
     for key in ['general', 'local', 'visitor']:
-        standings[key] = list(standings[key].values())
+        standings[key] = [team for team in list(standings[key].values()) if team['existsThisSeason'] == True]
         for team in standings[key]:
+            team.pop('existsThisSeason')
             if len(team['form']) > 5:
                 team['form'] = team['form'][len(team['form'])-5:]
 
