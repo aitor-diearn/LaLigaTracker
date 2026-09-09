@@ -9,7 +9,7 @@ Dichos ficheros se almacenan en la carpeta <i>frontend/src/data</i>.
 
 La parte front-end es una aplicación hecha en React, versión 19.2.6, y creada con Vite. Además, se ha utilizado la librería TailwindCSS para estilizar la aplicación.
 
-La aplicación se encuentra publicada en GitHub Pages mediante CI/CD, usando GitHub Actions. La aplicación se despliega cada 2 horas, o cada vez que se lleva a cabo una acción de push sobre la rama master, para reflejar los cambios realizados o actualizar los datos.
+La aplicación se encuentra publicada en GitHub Pages mediante CI/CD, usando GitHub Actions. La aplicación se despliega cada 3 horas aproximadamente, o cada vez que se lleva a cabo una acción de push sobre la rama master, para reflejar los cambios realizados o actualizar los datos.
 
 Para ver la página, <a href="https://aitor-diearn.github.io/LaLigaTracker/">pulse aquí.</a>
 
@@ -33,7 +33,7 @@ The back-end is developed with Python. This part retrieves data from the <a href
 
 The front-end is developed with React, version 19.2.6, and created with Vite. In addition, the Tailwind CSS library is used to style the application.
 
-The application is published on GitHub Pages via CI/CD, using GitHub Actions. The application is deployed every 2 hours, or whenever a push is made to the master branch, to reflect any changes made or to update the data.
+The application is published on GitHub Pages via CI/CD, using GitHub Actions. The application is deployed approximately every 3 hours, or whenever a push is made to the master branch, to reflect any changes made or to update the data.
 
 To view the page, <a href="https://aitor-diearn.github.io/LaLigaTracker/">click here.</a>
 
