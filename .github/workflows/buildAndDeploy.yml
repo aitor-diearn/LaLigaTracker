@@ -9,7 +9,6 @@ on:
 
   schedule:
     - cron: "0 */3 * * *"
-    - timezone: "Europe/Madrid"
 
 permissions:
   contents: read
