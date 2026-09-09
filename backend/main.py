@@ -1,6 +1,7 @@
 import logging
 import time
 import os
+import sys
 from dotenv import load_dotenv
 from utilities.utilities import formatOriginalData, solveTies, sortStandings, getMetadata, saveDataInFile
 from classes.GetDataFromApi import GetDataFromApi
@@ -22,11 +23,15 @@ try:
     matches = getDataFromApi.getData('v4/competitions/PD/matches')
 except Exception as e:
     logging.exception(str(e))
-    exit()
+    sys.exit(1)
 
 # Formateamos y generamos los datos necesarios para el front-end
 logging.info('Generating JSON for matches, standings and teams')
-matchesDef, standingsDef, teamsDef = formatOriginalData(matches)
+try:
+    matchesDef, standingsDef, teamsDef = formatOriginalData(matches)
+except Exception as e:
+    logging.exception(str(e))
+    sys.exit(1)
 
 # Resolvemos los empates a puntos en las clasificaciones
 logging.info('Solving ties')
@@ -53,5 +58,7 @@ try:
         saveDataInFile(data, '../frontend/src/data/' + nameFile + '.json')
 except FileNotFoundError as e:
     logging.exception(str(e))
-    exit()
+    sys.exit(1)
+
 logging.info('Process finished')
+sys.exit(0)

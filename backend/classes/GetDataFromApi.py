@@ -29,6 +29,9 @@ class GetDataFromApi():
                 Exception: Si no se obtiene nada de la Api, se arroja una excepción.
         """
 
+        if self.__headers['X-Auth-Token'] == '' or self.__headers['X-Auth-Token'] == None:
+            raise Exception('Unexistent API_KEY')
+
         request = requests.get('http://api.football-data.org/' + url, headers=self.__headers)
         if request.status_code == 200:
             data = request.json()
