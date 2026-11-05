@@ -1,6 +1,4 @@
 import Crest from './Crest'
-import Standings from './Standings'
-import ShowMatch from './ShowMatch'
 import Window from './Window'
 import standings from '../data/standings.json'
 import matches from '../data/matches.json'

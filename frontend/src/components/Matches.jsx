@@ -1,5 +1,4 @@
 import Window from "./Window"
-import Footer from "./Footer"
 import ShowMatch from "./ShowMatch"
 import matches from '../data/matches.json'
 import teams from '../data/teams.json'

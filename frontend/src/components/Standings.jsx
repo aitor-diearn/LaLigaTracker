@@ -1,5 +1,4 @@
 import Window from "./Window"
-import Footer from "./Footer"
 import Crest from "./Crest"
 import standings from '../data/standings.json'
 import teams from '../data/teams.json'

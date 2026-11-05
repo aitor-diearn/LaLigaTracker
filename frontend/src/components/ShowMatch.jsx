@@ -1,4 +1,3 @@
-import React from 'react'
 import Crest from './Crest'
 import { formatDate } from "../utils/formatDate"
 
